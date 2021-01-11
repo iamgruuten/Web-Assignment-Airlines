@@ -1,0 +1,160 @@
+﻿@model WEB_Assignment.Models.FlightDetailsViewModel
+
+@{
+    ViewData["Title"] = "Customer";
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+@{
+    string depart;
+    string arrival;
+    depart = Context.Session.GetString("departCity");
+    arrival = Context.Session.GetString("arrivalCity");
+}
+<body style="background-color:#fbfbfb;">
+    <div class="container mt-2">
+        <div class="row mb-1">
+            <h3 class="col-sm-12">Flight Available</h3>
+            <h3 class="col-sm-12">
+                @depart to @arrival
+            </h3>
+            <p class="col-sm-12">Time is based on SGT</p>
+        </div>
+
+        <div class="container">
+            @for (int i = 0; i < Model.Allflights.Count(); i++)
+            {
+                if ((Model.Allflights[i].noOfEcoSeats - Model.Allflights[i].noOfEcoSeatsBooked) != 0)
+                {
+                    <form asp-action="SelectFlight" method="post">
+                        <input asp-for="scheduleid" type="hidden" value="@Model.Allflights[i].scheduleid" />
+                        <div class="container border mt-2" style="border-color:lightslategrey;background-color:white">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <span class="stop-time col-lg-12 mb-3 mt-1">Non-stop • @Model.Allflights[i].timeTaken Hours</span>
+                                        <div class="form-group col-lg-3">
+                                            <span class="hour col-lg-12">@Model.Allflights[i].departureCity.Substring(0, 3) @Model.Allflights[i].departureDate.ToString("HH:mm")</span>
+                                            <input asp-for="departureCity" type="hidden" value="@Model.Allflights[i].departureCity" />
+                                            <input asp-for="departureTime" type="hidden" value="@Model.Allflights[i].departureDate" />
+
+                                            <span class="country-name col-lg-12">@Model.Allflights[i].departureCity</span>
+
+                                            <span class="date col-lg-12">@Model.Allflights[i].departureDate.ToString("dd MMMM") (@Model.Allflights[i].departureDate.ToString("dddd"))</span>
+                                            <input asp-for="departureDate" type="hidden" value="@Model.Allflights[i].departureDate" />
+                                        </div>
+
+                                        <div class="form-group col-lg-3 station-stop-div">
+                                            <div class="station-stop">
+                                                <span class="station-stop-detail">
+                                                    <i class="material-icons ico-flight">flight</i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
+                                            <span class="hour col-lg-12">@Model.Allflights[i].arrivalCity.Substring(0, 3) @Model.Allflights[i].arrivalDate.ToString("HH:mm")</span>
+                                            <input asp-for="arrivalCity" type="hidden" value="@Model.Allflights[i].arrivalCity" />
+                                            <input asp-for="arrivalTime" type="hidden" value="@Model.Allflights[i].arrivalDate" />
+
+                                            <span class="country-name col-lg-12">@Model.Allflights[i].arrivalCity</span>
+                                            <span class="date col-lg-12">@Model.Allflights[i].arrivalDate.ToString("dd MMMM") (@Model.Allflights[i].arrivalDate.ToString("dddd"))</span>
+                                            <input asp-for="arrivalDate" type="hidden" value="@Model.Allflights[i].arrivalDate" />
+                                        </div>
+                                        <div class="form-group col-lg-3 airline-info">
+                                            <span class="flight-number row">Flight @Model.Allflights[i].flightNo</span>
+                                            <span class="plane-model row">Model @Model.Allflights[i].flightModel</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-info-select">
+                                    <span class="head-title-box">
+                                        <span class="text-head">Economy</span>
+                                        <input asp-for="typeSelected" type="hidden" value="Economy" />
+                                    </span>
+                                    <span class="body-title-box">
+                                        <span class="text-head">SGD @Model.Allflights[i].economyPrice.ToString()</span>
+                                        <input asp-for="costSelected" type="hidden" value="@Model.Allflights[i].economyPrice.ToString()" />
+                                        <span class="text-head">@(Model.Allflights[i].noOfEcoSeats - Model.Allflights[i].noOfEcoSeatsBooked) Seats left</span>
+                                    </span>
+                                    <div class="col-lg-12">
+                                        <button class="submit">Buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+                if ((Model.Allflights[i].noOfBusSeats - Model.Allflights[i].noOfBusSeatsBooked) != 0)
+                {
+                    <form asp-action="SelectFlight" method="post">
+                        <input asp-for="scheduleid" type="hidden" value="@Model.Allflights[i].scheduleid" />
+                        <div class="container border mt-2" style="border-color:lightslategrey;background-color:white">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <span class="stop-time col-lg-12 mb-3 mt-1">Non-stop • @Model.Allflights[i].timeTaken Hours</span>
+                                        <div class="form-group col-lg-3">
+                                            <span class="hour col-lg-12">@Model.Allflights[i].departureCity.Substring(0, 3) @Model.Allflights[i].departureDate.ToString("HH:mm")</span>
+                                            <input asp-for="departureCity" type="hidden" value="@Model.Allflights[i].departureCity" />
+                                            <input asp-for="departureTime" type="hidden" value="@Model.Allflights[i].departureDate" />
+
+                                            <span class="country-name col-lg-12">@Model.Allflights[i].departureCity</span>
+                                            <span class="date col-lg-12">@Model.Allflights[i].departureDate.ToString("dd MMMM") @Model.Allflights[i].departureDate.ToString("dddd")</span>
+                                            <input asp-for="departureDate" type="hidden" value="@Model.Allflights[i].departureDate" />
+                                        </div>
+
+                                        <div class="form-group col-lg-3 station-stop-div">
+                                            <div class="station-stop">
+                                                <span class="station-stop-detail">
+                                                    <i class="material-icons ico-flight">flight</i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
+                                            <span class="hour col-lg-12">@Model.Allflights[i].arrivalCity.Substring(0, 3) @Model.Allflights[i].arrivalDate.ToString("HH:mm")</span>
+
+                                            <input asp-for="arrivalCity" type="hidden" value="@Model.Allflights[i].arrivalCity" />
+                                            <input asp-for="arrivalTime" type="hidden" value="@Model.Allflights[i].arrivalDate" />
+                                            <span class="country-name col-lg-12">@Model.Allflights[i].arrivalCity</span>
+                                            <span class="date col-lg-12">@Model.Allflights[i].arrivalDate.ToString("dd MMMM") (@Model.Allflights[i].arrivalDate.ToString("dddd"))</span>
+                                            <input asp-for="arrivalDate" type="hidden" value="@Model.Allflights[i].arrivalDate" />
+                                        </div>
+                                        <div class="form-group col-lg-3 airline-info">
+                                            <span class="flight-number row">Flight @Model.Allflights[i].flightNo</span>
+                                            <span class="plane-model row">Model @Model.Allflights[i].flightModel</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-info-select">
+                                    <span class="head-title-box-vip">
+                                        <span class="text-head">Business</span>
+                                        <input asp-for="typeSelected" type="hidden" value="Business" />
+                                    </span>
+                                    <span class="body-title-box">
+                                        <span class="text-head">SGD @Model.Allflights[i].businessPrice</span>
+                                        <input asp-for="costSelected" type="hidden" value="@Model.Allflights[i].businessPrice" />
+                                        <span class="text-head">@(Model.Allflights[i].noOfBusSeats - Model.Allflights[i].noOfBusSeatsBooked) Seats left</span>
+                                    </span>
+                                    <div class="col-lg-12">
+                                        <button class="submit">Buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+            }
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

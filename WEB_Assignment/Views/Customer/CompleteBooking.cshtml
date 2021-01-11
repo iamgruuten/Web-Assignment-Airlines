@@ -1,0 +1,23 @@
+﻿@model WEB_Assignment.Models.PassengerViewModel
+
+@{
+    ViewData["Title"] = "Complete Booking";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+
+<div class="container mt-5">
+    <h4 class="col-lg-12">Thank you, Your flight is successfully booked</h4>
+    <h4 class="col-lg-12">Enjoy your trip upcoming trip!</h4>
+
+    <div class="row mt-5">
+        <a class="btn col-sm-3 btn-default" asp-action="BookTrip">
+            Back to home
+        </a>
+        <a class="btn ml-3 col-sm-3 btn-default" asp-action="viewBooking">
+            View Booking
+        </a>
+    </div>
+</div>

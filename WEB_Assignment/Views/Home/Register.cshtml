@@ -1,0 +1,100 @@
+﻿@model WEB_Assignment.Models.CustomerModel
+
+@{
+    ViewData["Title"] = "Customer";
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css?version=51" />
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <br />
+        <div class="flex-container">
+            <h1>Create Profile</h1>
+            <hr />
+            <br />
+            <form asp-action="Register" method="post">
+                <fieldset class="FormContent">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Nationality" class="control-label"></label>
+                                <input asp-for="Nationality" class="form-control" />
+                                <span asp-validation-for="Nationality" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="phoneNumber" class="control-label"></label>
+                                <div class="input-group">
+                                    <input value="+" class="col-lg-1 col-sm-1" disabled />
+                                    <input asp-for="countryCode" class="form-control col-sm-2 col-lg-2" />
+                                    <span class="input-group-addon">-</span>
+                                    <input asp-for="phoneNumber" class="form-control col-sm-10 col-lg-9" />
+                                </div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <span asp-validation-for="countryCode" class="text-danger"></span>
+                                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EmailAddress" class="control-label"></label>
+                                <input asp-for="EmailAddress" class="form-control" />
+                                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="dob" class="control-label"></label>
+                                <input asp-for="dob" class="form-control" />
+                                <span asp-validation-for="dob" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-9 col-form-label mr-3" asp-for="defaultPassword"></label>
+
+                                @foreach (var item in ViewData["defaultpwd"] as List<String>)
+                                {
+                                <label style="padding-right:20px;" class="col-sm-1">
+                                    <input asp-for="defaultPassword" name="default" onclick="handleClick(this)" type="radio" value="@item" />
+                                    @item
+                                </label>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="confirmPassword" class="control-label"></label>
+                                <input asp-for="confirmPassword" id="confirmPassword" class="form-control" />
+                                <span asp-validation-for="confirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    <button type="submit" value="Register">SIGN UP</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 mx-auto">
+                            <br />
+                            <br />
+                            <p class="font-weight-bold">Have existing account? Login to get started!</p>
+                            <br />
+                            <div class="col-sm-6">
+                                <a class="btn btn-default" asp-action="Login">LOGIN HERE</a>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,96 @@
+﻿@model WEB_Assignment.Models.StaffViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Package3.css" />
+</head>
+<h4 class="PageTitle">Update Status</h4>
+<body>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
+            <form asp-action="Edit">
+                <fieldset class="FormContent">
+                    <div class="form-group row">
+                        <label asp-for="StaffID" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="StaffID" readonly class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="StaffName"
+                               class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="StaffName" readonly
+                                   class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Vocation"
+                               class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="Vocation" readonly
+                                   class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Gender"
+                               class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="Gender" readonly
+                                   class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="dateOfemployed"
+                               class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="dateOfemployed" readonly
+                                   class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="emailAddress"
+                               class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="emailAddress" readonly
+                                   class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="status" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <div class="form-group form-check-inline">
+                                <label class="col-form-label">
+                                    <input asp-for="status" type="radio" value="Active"
+                                           checked class="form-check-input" />
+                                    <span>Active</span>
+                                </label>
+                                <label class="col-form-label">
+                                    <input asp-for="status" type="radio" value="Inactive"
+                                           class="form-check-input" />
+                                    <span>Inactive</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="ScheduleID" hidden
+                                   class="form-control-plaintext" />
+                        </div>
+                    </div>
+                    @Html.ValidationMessage("Schedule", new { @style = "color:red" })
+                    <div class="form-group row btn-div">
+                        <div class="col-sm-5">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <a asp-action="UpdateFlightPersonnelStatus" asp-controller="Staff">Back to Personnel List</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>

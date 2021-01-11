@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LionCity Airlines</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        @if (Context.Session.GetString("Role") == "Customer")
+        {
+        @await Html.PartialAsync("_UserPartialMenu.cshtml")
+        }
+        else if (Context.Session.GetString("Role") == "Staff")
+        {
+        @await Html.PartialAsync("AdminNavBar.cshtml")
+        }
+        else
+        {
+        @await Html.PartialAsync("NonUserPartialMenu.cshtml")
+
+        }
+    </header>
+
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @if (ViewContext.RouteData.Values["action"].ToString() != "PassengerPrintDetails")
+    {
+    <footer class="page-footer font-small teal pt-4" style="background:#e4e4e4">
+        <!-- Footer Text -->
+        <div class="container-fluid text-center text-md-left">
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col mt-md-0 mt-3 row">
+
+                    <!-- Content -->
+                    <div class="col-2 col-sm-1">
+                        <img class="img-fluid" src="~/images/logoImg.png" />
+                    </div>
+                    <div class="row">
+                        <h4 class="col-md-12">Lion City Airlines</h4>
+                        <h4 class="col-md-12">Founded on 2020</h4>
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none pb-3">
+
+                    <!-- Grid column -->
+                </div>
+            </div>
+            <!-- Grid row -->
+        </div>
+        <!-- Footer Text -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a>Lee Quan Sheng, Rafael and Yu Min</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

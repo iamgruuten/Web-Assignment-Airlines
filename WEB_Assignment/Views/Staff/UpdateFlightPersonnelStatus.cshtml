@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WEB_Assignment.Models.StaffViewModel>
+
+@if (Model.ToList().Count > 0)
+{
+    <head>
+        <link rel="stylesheet" href="~/css/Package3.css" />
+    </head>
+    <div class="table-responsive">
+        <div class="search">
+            <form asp-action="UpdateFlightPersonnelStatus" method="post">
+                <b>Search By FullName:</b>
+                <input type="text" id="Staffname" name="Staffname" required>
+                <input type="submit" value="filter" />
+            </form>
+
+            @{
+                if (ViewBag.SearchKey != null)
+                {
+
+                    @*@ViewBag.SearchKey*@
+
+                }
+            }
+        </div>
+        <table id="viewStaff" class="table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Staff <br /> ID</th>
+                    <th>Name</th>
+                    <th>Flight Schedule <br /> ID</th>
+                    <th>Vocation</th>
+                    <th>Status</th>
+                    <th>Update <br /> Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.StaffID.ToString()</td>
+                        <td>@item.StaffName</td>
+                        <td>@item.ScheduleID</td>
+                        <td>@item.Vocation</td>
+                        <td>@item.status</td>
+
+                        <td>
+                            <a asp-action="Edit" asp-controller="Staff"
+                               asp-route-id="@item.StaffID">Update Status</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <span style="color:red">No record found!</span>
+}

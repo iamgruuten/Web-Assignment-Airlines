@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "ViewFlightSchedules";
+}
+
+@model IEnumerable<WEB_Assignment.Models.FlightSchedule.FlightSchedule>
+
+<div class="container-fluid">
+
+    <!--Header area-->
+    @if (Convert.ToInt32(ViewData["routeId"]) != 0)
+    {
+        <div class="row m-4 justify-content-end text-center">
+            <h3 class="col-4">View Flight Schedules for Route No. @ViewData["routeId"]</h3>
+            <div class="col-4 text-right">
+                <a class="btn btn-primary" asp-controller="Staff" asp-action="CreateFlightSchedule" asp-route-routeId="@ViewData["routeId"]">+ Create New Flight Schedule</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="row m-4 justify-content-center">
+            View Flight Schedules
+        </h3>
+    }
+
+    @if (Model.ToList().Count > 0)
+    {
+        <!--Header area-->
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Schedule ID</th>
+                        <th scope="col">Route ID</th>
+                        <th scope="col">Flight No.</th>
+                        <th scope="col">Aircraft ID</th>
+                        <th scope="col">Departure Datetime</th>
+                        <th scope="col">Arrival Datetime</th>
+                        <th scope="col">Economy Price</th>
+                        <th scope="col">Business Price</th>
+                        <th scope="col">Bookings</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.ScheduleID.ToString()</th>
+                            <td>@(item.RouteID)</td>
+                            <td>@(item.FlightNumber)</td>
+                            <td>@(item.AircraftID)</td>
+                            <td>@(item.DepartureDateTime)</td>
+                            <td>@(item.ArrivalDateTime)</td>
+                            <td>@(Math.Round(item.EconomyClassPrice, 2))</td>
+                            <td>@(Math.Round(item.BusinessClassPrice, 2))</td>
+                            <td>@(new WEB_Assignment.DAL.FlightScheduleDAL().GetBookingPerSchedule(item.ScheduleID))</td>
+                            <td><a asp-controller="Staff" asp-action="UpdateFlightSchedule" asp-route-scheduleId="@item.ScheduleID">@(item.Status)</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <h3 class="text-center">No Flight Schedules have been created for Route No. @ViewData["routeId"].</h3>
+    }
+</div>

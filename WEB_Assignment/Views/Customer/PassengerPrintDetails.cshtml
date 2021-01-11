@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WEB_Assignment.Models.PassengerModel>
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+
+@if (Model.Count() != 0)
+{
+    @foreach (var passenger in Model)
+    {
+        <div class="container-fluid mt-5">
+            <div class="container mt-3 bookingStyle">
+                <div class="row mt-4">
+                    <h3>Passenger</h3>
+                </div>
+                <div class="row mt-3 printDetails">
+                    <div class="form-group mb-1 col-5">
+                        <label class="control-label">@Html.DisplayNameFor(passenger => passenger.passengerName)</label>
+                        <h4>@passenger.passengerName</h4>
+                    </div>
+                    <div class="form-group mb-1 col-5" style="border-left: thick solid #ff0000;">
+                        <label class="control-label">@passenger.flightDetailsModel.departureCountry, @passenger.flightDetailsModel.departureCity</label>
+                        <h4>@passenger.flightDetailsModel.departureCity - @passenger.flightDetailsModel.departureTime.ToShortTimeString(), @passenger.flightDetailsModel.departureTime.ToString("dd/MM/yyyy")</h4>
+                    </div>
+                    <div class="form-group mb-1 col-1" style="border-left: thick solid #ff0000;">
+                        <img width="60" src="@String.Format("data:image/png;base64,{0}",Convert.ToBase64String(passenger.imageBuffer))" />
+                    </div>
+                </div>
+                <div class="row mt-3 printDetails">
+                    <div class="form-group mb-1 col-5">
+                        <label class="control-label">@Html.DisplayNameFor(passenger => passenger.passportNumber)</label>
+                        <h4>@passenger.passportNumber</h4>
+                    </div>
+                    <div class="form-group mb-1 col-6" style="border-left: thick solid #ff0000;">
+                        <label class="control-label">@passenger.flightDetailsModel.arrivalCountry, @passenger.flightDetailsModel.arrivalCity</label>
+                        <h4>@passenger.flightDetailsModel.arrivalCity - @passenger.flightDetailsModel.arrivalTime.ToShortTimeString(), @passenger.flightDetailsModel.arrivalTime.ToString("dd/MM/yyyy")</h4>
+                    </div>
+                </div>
+                <div class="row mt-3 printDetails">
+                    <div class="form-group mb-1 col-4  mb-4">
+                        <label class="control-label">@Html.DisplayNameFor(passenger => passenger.nationality)</label>
+                        <h4>@passenger.nationality</h4>
+                    </div>
+                    <div class="form-group mb-1 col-5">
+                        <label class="control-label">@Html.DisplayNameFor(passenger => passenger.flightDetailsModel.flightModel)</label>
+                        <h4>@passenger.flightDetailsModel.flightModel</h4>
+                    </div>
+                    <div class="form-group mb-1 col-2  mb-4">
+                        <label class="control-label">@Html.DisplayNameFor(passenger => passenger.flightDetailsModel.flightNo)</label>
+                        <h4>@passenger.flightDetailsModel.flightNo</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="page-break-after: always;"></div>
+
+    }
+}

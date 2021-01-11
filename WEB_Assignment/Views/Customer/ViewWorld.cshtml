@@ -1,0 +1,149 @@
+﻿@model WEB_Assignment.Models.CovidModel
+
+@{
+    ViewData["Title"] = "World Update";
+    Countries countryStats = ViewData["CountryStats"] as Countries;
+    String imageurl = ViewData["countryImg"] as String;
+    String affected = ViewData["affectPop"] as String;
+
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+
+<body>
+    <div class="col-sm-12 padding-rmv">
+        <img src="~/images/world.jpg" class="img-fluid w-100" />
+        <div class="container" id="mainContainer">
+
+            <div class="flex-container">
+                <h1 class="bottom-left" style="color:floralwhite">COVID-19</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h4 class="bottom-left" style="color:black">WorldWide Covid-19 Status</h4>
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <table class="table mt-4 data-table col-md-12" style="border-color:black;">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Global.NewConfirmed)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Global.NewDeaths)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Global.NewRecovered)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Global.TotalConfirmed)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Global.TotalDeaths)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Global.TotalRecovered)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @String.Format("{0:n0}", Model.Global.NewConfirmed)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", Model.Global.NewDeaths)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", Model.Global.NewRecovered)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", Model.Global.TotalConfirmed)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", Model.Global.TotalDeaths)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", Model.Global.TotalRecovered)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+            <form method="post">
+
+                <div class="row mb-4">
+                    Find by Country: @Html.TextBox("Country")
+                </div>
+                <input type="submit" value="Search" />
+            </form>
+
+            @if (countryStats != null)
+            {
+            <div class="row">
+                <img src="@imageurl" class="img-fluid mr-4 col-sm-1" /> <h4 class="col-sm-9">@countryStats.Country</h4>
+                <h3 class="col-sm-9">Country Population: @affected</h3>
+            </div>
+            <div class="row">
+                <table class="table mt-4 data-table col-md-12" style="border-color:black;">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Countries[0].NewConfirmed)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Countries[0].NewDeaths)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Countries[0].NewRecovered)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Countries[0].TotalConfirmed)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Countries[0].TotalDeaths)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Countries[0].TotalRecovered)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @String.Format("{0:n0}", countryStats.NewConfirmed)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", countryStats.NewDeaths)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", countryStats.NewRecovered)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", countryStats.TotalConfirmed)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", countryStats.TotalDeaths)
+                            </td>
+                            <td>
+                                @String.Format("{0:n0}", countryStats.TotalRecovered)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            }
+            else
+            {
+            <span class="text-danger">@Html.ValidationMessage("Stats")</span>
+            }
+        </div>
+    </div>
+</body>

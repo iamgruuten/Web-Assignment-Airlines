@@ -1,0 +1,66 @@
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Customer" asp-action="BookTrip"><img src="~/images/logo.png" class="img-responsive" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><img src="~/images/nav.png" /></span>
+        </button>
+
+        <div class="navbar-collapse collapse d-sm-inline-flex">
+            <ul class="navbar-nav flex-grow-1 mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Customer" asp-action="updatePassword">Update Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Customer" asp-action="BookTrip">Book Trip</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Customer" asp-action="ViewBooking">View Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Customer" asp-action="ViewWorld">World</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About Us</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav flex-grow-1 ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark">Welcome back, @Context.Session.GetString("Name")</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="LogOut">Sign out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@if (ViewContext.RouteData.Values["action"].ToString() == "SelectFlight" || ViewContext.RouteData.Values["action"].ToString() == "PassengerDetails" || ViewContext.RouteData.Values["action"].ToString() == "ReviewPassenger")
+{
+    string page = ViewContext.RouteData.Values["action"].ToString();
+    Dictionary<string, string> page_track = new Dictionary<string, string>();
+    page_track.Add("SelectFlight", "");
+    page_track.Add("PassengerDetails", "");
+    page_track.Add("ReviewPassenger", "");
+
+    page_track[page] = "active";
+
+    <div class="border-bottom-0">
+        <ul class="nav nav-pills col-sm-12 nav-flight-selections" role="tablist">
+            <li class="nav-item col-sm-3">
+                <a class="nav-link @page_track["SelectFlight"]" href="" role="tab" data-toggle="tab"> <span class="badge badge-success mr-2">1</span> Flights</a>
+            </li>
+            <li class="nav-item col-sm-3">
+                <a class="nav-link  @page_track["PassengerDetails"]" href="" role="tab" data-toggle="tab"> <span class="badge badge-success mr-2">2</span> Passengers</a>
+            </li>
+            <li class="nav-item col-sm-3">
+                <a class="nav-link  @page_track["ReviewPassenger"]" href="" role="tab" data-toggle="tab"><span class="badge badge-success mr-2">3</span> Review</a>
+            </li>
+            <li class="nav-item col-sm-3">
+                <a class="nav-link" href="" role="tab" data-toggle="tab"><span class="badge badge-success mr-2">4</span> Complete</a>
+            </li>
+        </ul>
+    </div>
+}

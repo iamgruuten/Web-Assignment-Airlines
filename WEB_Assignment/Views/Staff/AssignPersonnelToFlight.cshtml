@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WEB_Assignment.Models.FlightViewModel>
+
+@if (Model.ToList().Count > 0)
+{
+    <head>
+        <link rel="stylesheet" href="~/css/Package3.css" />
+    </head>
+    <div class="table-responsive">
+        <div class="search">
+            <form asp-action="AssignPersonnelToFlight" method="post">
+                <b>Search By FlightScheduleID:</b>
+                <input type="number" id="FlightScheduleID" name="FlightScheduleID" required>
+                <input type="submit" value="filter" />
+            </form>
+
+            @{
+                if (ViewBag.SearchID != null)
+                {
+                    <span>
+                        @ViewBag.SearchScheduleID
+                    </span>
+                }
+            }
+        </div>
+        <table id="ViewFlight" class="table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Schedule ID</th>
+                    <th>Flight Number </th>
+                    <th>Route ID</th>
+                    <th>AircratfID</th>
+                    <th>Departure DateTime</th>
+                    <th>Arrival DateTime</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FlightScheduleID.ToString()</td>
+                        <td>@item.FlightNo</td>
+                        <td>@item.RouteID</td>
+                        <td>@item.AircraftID</td>
+                        <td>@item.DPD</td>
+                        <td>@item.ADT</td>
+                        <td>@item.Statusflight.ToString()</td>
+                        <td>
+                            <a asp-action="Select" asp-controller="Staff"
+                               asp-route-id="@item.FlightScheduleID">Select</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <span style="color:red">No record found!</span>
+}

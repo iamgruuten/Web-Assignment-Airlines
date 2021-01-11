@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WEB_Assignment.Models.PassengerModel>
+
+@{
+    ViewData["Title"] = "View Trip";
+    int schedID = (int)ViewData["id"];
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+
+<body>
+    <div class="col-sm-12 padding-rmv">
+        <img src="~/images/loginbg.jpeg" class="img-fluid w-100" />
+        <div class="container" id="mainContainer">
+
+            <div class="flex-container">
+                <h1 class="bottom-left">Upcoming Trips</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <a class="col-sm-3" href='@Url.Action("PassengerPrintDetails", "Customer", new {id = schedID})'>
+                    <img style="width:30px" src="~/images/print.png" />
+                </a>
+            </div>
+        </div>
+
+        @if (Model.Count() != 0)
+        {
+        @foreach (var passenger in Model)
+            {
+
+        <div class="container mt-3 bookingStyle">
+            <div class="row mt-4">
+                <h3>Passenger</h3>
+            </div>
+            <div class="row mt-3">
+                <div class="form-group mb-1 col-sm-5">
+                    <label class="control-label">@Html.DisplayNameFor(passenger => passenger.passengerName)</label>
+                    <h4>@passenger.passengerName</h4>
+                </div>
+                <div class="form-group mb-1 col-sm-7" style="border-left: thick solid #ff0000;">
+                    <label class="control-label">@passenger.flightDetailsModel.departureCountry, @passenger.flightDetailsModel.departureCity</label>
+                    <h4>@passenger.flightDetailsModel.departureCity - @passenger.flightDetailsModel.departureTime.ToShortTimeString(), @passenger.flightDetailsModel.departureTime.ToString("dd/MM/yyyy")</h4>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="form-group mb-1 col-sm-5">
+                    <label class="control-label">@Html.DisplayNameFor(passenger => passenger.passportNumber)</label>
+                    <h4>@passenger.passportNumber</h4>
+                </div>
+                <div class="form-group mb-1 col-sm-7" style="border-left: thick solid #ff0000;">
+                    <label class="control-label">@passenger.flightDetailsModel.arrivalCountry, @passenger.flightDetailsModel.arrivalCity</label>
+                    <h4>@passenger.flightDetailsModel.arrivalCity - @passenger.flightDetailsModel.arrivalTime.ToShortTimeString(), @passenger.flightDetailsModel.arrivalTime.ToString("dd/MM/yyyy")</h4>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="form-group mb-1 col-sm-4  mb-4">
+                    <label class="control-label">@Html.DisplayNameFor(passenger => passenger.nationality)</label>
+                    <h4>@passenger.nationality</h4>
+                </div>
+                <div class="form-group mb-1 col-sm-4">
+                    <label class="control-label">@Html.DisplayNameFor(passenger => passenger.flightDetailsModel.flightModel)</label>
+                    <h4>@passenger.flightDetailsModel.flightModel</h4>
+                </div>
+                <div class="form-group mb-1 col-sm-4  mb-4">
+                    <label class="control-label">@Html.DisplayNameFor(passenger => passenger.flightDetailsModel.flightNo)</label>
+                    <h4>@passenger.flightDetailsModel.flightNo</h4>
+                </div>
+            </div>
+        </div>
+        <hr />
+            }
+        }
+        else
+        {
+        <div class="container-fluid" style="margin-top:auto;margin-bottom:auto; min-height: 50vh;">
+            @await Html.PartialAsync("_error404PartialView", new ViewDataDictionary(ViewData) { { "ErrorCode", "404" } });
+        </div>
+        }
+    </div>
+</body>

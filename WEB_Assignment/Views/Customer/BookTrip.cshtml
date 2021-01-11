@@ -1,0 +1,178 @@
+﻿@model WEB_Assignment.Models.BookTripViewModel;
+
+@{
+    ViewData["Title"] = "Customer";
+    TempData.Keep("countryList");
+    countryList cl = Newtonsoft.Json.JsonConvert.DeserializeObject<countryList>(TempData["countryList"].ToString());
+    List<FlightDetailsModel> flightDetails = ViewData["AllAvailableFlight"] as List<FlightDetailsModel>;
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+
+<div class="container-fluid-2">
+
+    <div id="div1" class="row col-lg-12">
+        <div class="container">
+            <br />
+            <br />
+            <br />
+            <br />
+            <h1 class="col-12 mt-5 font-weight-bolder" style="color:white">LION CITY AIRLINES</h1>
+            <h3 class="col-12 font-weight-bolder" style="color:white">FLY SAFE . BE SAFE . TRAVEL SAFE</h3>
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <div id="divImg" class="col-lg-8 shadow-lg">
+        <div id="exTab3">
+            <div class="form-group">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="nav-item navbar-brand col-lg-2" data-toggle="tab" style="background-color: #ffc107;">
+                                <img src="~/images/logo.png" class="img-fluid" style="padding:15px;" />
+                            </li>
+                            <li class="nav-item navbar-brand col-lg-3">
+                                <a class="nav-link active" data-toggle="tab" style="padding:15px;" href="#bookFlight">BOOK FLIGHT</a>
+                            </li>
+                            <li class="nav-item navbar-brand col-lg-3">
+                                <a class="nav-link" data-toggle="tab" style="padding:15px;" href="#viewBook">VIEW FLIGHT</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" role="tabpanel" id="bookFlight">
+                                <br />
+                                <form asp-action="BookTrip" method="post" autocomplete="off">
+                                    <fieldset class="FormContent">
+                                        <div class="row">
+                                            <div class="input-group col-lg-6">
+                                                <div class="form-group col-lg-6 padding-rmv">
+                                                    <div id="floatContainer1" class="float-container">
+                                                        <label asp-for="Origin" class="control-label ml-3"></label>
+                                                        <input asp-for=" Origin" type="text" id="floatField1" list="originCountry" class="form-rounded" style="text-indent: 15px;" data-placeholder="From" />
+                                                    </div>
+                                                    <span asp-validation-for="Origin" class="text-danger"></span>
+                                                </div>
+                                                <img src="~/images/plane.png" class="position-absolute img-fluid col-lg-1 col-1 icon" />
+                                                <div class="form-group col-lg-6 padding-rmv">
+                                                    <div id="floatContainer1" class="float-container">
+                                                        <label asp-for="Destination" class="control-label ml-3"></label>
+                                                        <input asp-for="Destination" list="arrivalCountry" type="text" id="floatField1" class="form-rounded" style="text-indent: 15px;" data-placeholder="To" />
+                                                    </div>
+                                                    <span asp-validation-for="Destination" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <datalist id="originCountry">
+                                                @foreach (var item in cl.depart.Keys)
+                                                {
+                                                    foreach (var city in cl.depart[item])
+                                                    {
+                                                <option value="@item, @city" />
+
+                                                    }
+
+                                                }
+                                            </datalist>
+
+                                            <datalist id="arrivalCountry">
+                                                @foreach (var item in cl.arrival.Keys)
+                                                {
+                                                    foreach (var city in cl.arrival[item])
+                                                    {
+                                                <option value="@item, @city" />
+
+                                                    }
+
+                                                }
+                                            </datalist>
+
+                                            <div class="input-group col-lg-4">
+                                                <div class="col-lg-12 padding-rmv">
+                                                    <div class="form-group col-lg-12 full-input">
+                                                        <label asp-for="DepartDate" class="control-label ml-1 float-label"></label>
+                                                        <input asp-for="DepartDate" asp-format="{0:yyyy-MM-dd}" onchange="departDateOnChange()" id="departDateID" class="form-control padding-rmv form-rounded float-date" value="@((Model != null) ? Model.DepartDate.ToString("yyyy-MM-dd") : "")" />
+                                                    </div>
+                                                    <span asp-validation-for="DepartDate" class="text-danger"></span>
+                                                </div>
+
+                                                @*<div class="col-lg-6 padding-rmv">
+                                                        <div class="form-group col-lg-12 full-input">
+                                                            <label asp-for="ReturnDate" class="control-label ml-1 float-label"></label>
+                                                            <input asp-for="ReturnDate" id="returnDateID" class="form-control padding-rmv form-rounded float-date" />
+                                                        </div>
+                                                        <span asp-validation-for="ReturnDate" class="text-danger"></span>
+                                                    </div>*@
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="submit" value="BookTrip">Search</button>
+                                            </div>
+                                        </div>
+                                        <div class="row ml-3">
+                                            <div class="form-group col-lg-2 padding-rmv">
+                                                <label asp-for="NoOfAdult" class="control-label"></label>
+                                                <input asp-for="NoOfAdult" class="form-control" />
+                                                <span asp-validation-for="NoOfAdult" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-lg-2 padding-rmv">
+                                                <label asp-for="NoOfChild" class="control-label"></label>
+                                                <input asp-for="NoOfChild" class="form-control" />
+                                                <span asp-validation-for="NoOfChild" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-danger col-lg-12">
+                                            @Html.ValidationMessage("routeValid")
+                                        </div>
+                                    </fieldset>
+                                </form>
+                                <br />
+                            </div>
+                            <div class="tab-pane fade container" role="tabpanel" id="viewBook">
+                                <h3>Upcoming Open Flights</h3>
+                                <div class="row">
+
+                                    @foreach (FlightDetailsModel fdm in flightDetails)
+                                    {
+                                    <form class="view_flight_card mt-4 col-lg-5 ml-1 mr-1" asp-action="SelectBookTrip" method="post" autocomplete="off">
+
+                                        <p>Depart</p>
+
+                                        <h5>@fdm.departureCountry, @fdm.departureCity</h5>
+                                        <input asp-for="OriginCountry" type="hidden" class="form-control" value="@fdm.departureCountry" />
+                                        <input asp-for="Origin" type="hidden" class="form-control" value="@fdm.departureCity" />
+
+                                        <p class="mt-2">Arrival</p>
+
+                                        <h5>@fdm.arrivalCountry, @fdm.arrivalCity</h5>
+
+                                        <input asp-for="DestinationCountry" class="form-control" type="hidden" value="@fdm.arrivalCountry" />
+                                        <input asp-for="Destination" class="form-control" type="hidden" value="@fdm.arrivalCity" />
+                                        <p>@fdm.departureDate - @fdm.arrivalDate</p>
+
+                                        <input asp-for="DepartDate" class="form-control" type="hidden" value="@fdm.departureDate" />
+
+                                        <p class="col-sm-6">Duration - @fdm.timeTaken Hour</p>
+                                        <button class="mb-3 col-sm-4" type="submit" value="BookTrip">Select</button>
+                                    </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div2" class="row col-lg-12">
+        <div class="container" style="min-height:inherit;">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

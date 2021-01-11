@@ -1,0 +1,89 @@
+﻿@model WEB_Assignment.Models.FlightCrewModel
+
+@{
+    ViewData["Title"] = "AssigningPersonnelToFlightSchedule";
+    String date = @Model.DPD.Value.ToString();
+}
+<head>
+    <link rel="stylesheet" href="~/css/Package3.css" />
+</head>
+<h4 class="PageTitle">Assigning Personnel To Fligh Schedule </h4>
+<hr />
+
+<body>
+    <div class="row box">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
+            @using (Html.BeginForm("Select", "Staff", FormMethod.Post))
+            {
+                <fieldset>
+                    <div class="col-sm-2  col-md-3">
+                        <input asp-for="DPD" class="form-control-plaintext" type="hidden" />
+                    </div>
+                    <input asp-for="FlightNo" class="form-control-plaintext col-sm-2 col-form-label" type="hidden" />
+
+                    <input asp-for="FlightScheduleID" class="form-control-plaintext col-sm-2 col-form-label" type="hidden" />
+
+                    <div class="form-group row">
+                        <label asp-for="@Model.FlightScheduleID" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3 form-control-plaintext">
+                            @Html.Display("FlightScheduleID")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="FlightNo" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3 form-control-plaintext">
+                            @Html.Display("FlightNo")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="@Model.DPD" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3"> @date</div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Captain Pilot:</label>
+                        <div class="col-sm-2 col-md-3">
+                            @Html.DropDownListFor(m => m.StaffID, Model.FlightCaptains, "Please select", new { required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Co-Pilot:</label>
+                        <div class="col-sm-2 col-md-3">
+                            @Html.DropDownListFor(m => m.StaffID1, Model.SecondPilot, "Please select", new { required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Cabin Crew Leader:</label>
+                        <div class="col-sm-2 col-md-3">
+                            @Html.DropDownListFor(m => m.StaffID2, Model.CabinCrewLeader, "Please select", new { required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">  Flight Attendant 1:</label>
+                        <div class="col-sm-2 col-md-3">
+                            @Html.DropDownListFor(m => m.StaffID3, Model.CabinCrew1, "Please select", new { required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Flight Attendant 2:</label>
+                        <div class="col-sm-2 col-md-3">
+                            @Html.DropDownListFor(m => m.StaffID4, Model.CabinCrew2, "Please select", new { required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Flight Attendant 3:</label>
+                        <div class="col-sm-2 col-md-3">
+                            @Html.DropDownListFor(m => m.StaffID5, Model.CabinCrew3, "Please select", new { required = "required" })
+                        </div>
+                    </div>
+                    @Html.ValidationMessage("duplicate", new { @style = "color:red" })
+                    @Html.ValidationMessage("Conflict", new { @style = "color:red" })
+                    <div class="col-sm-5">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </fieldset>
+
+            }
+        </div>
+    </div>
+</body>

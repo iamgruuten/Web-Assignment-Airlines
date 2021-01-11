@@ -1,0 +1,88 @@
+﻿@model WEB_Assignment.Models.Staff
+@{
+    ViewData["Title"] = "CreateFlightPersonelRecord";
+}
+<link rel="stylesheet" href="~/css/Package3.css" />
+
+<h4 class="PageTitle">Create Personal Record</h4>
+<body>
+    <div class="row box">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
+            <form asp-action="CreateFlightPersonelRecord">
+                <fieldset class="FormContent">
+                    <div class="form-group row">
+                        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2  col-md-3">
+                            <input asp-for="Name" class="form-control" required />
+                            <span asp-validation-for="Name"
+                                  class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="EmailAddr" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="EmailAddr" class="form-control" required />
+                            <span asp-validation-for="EmailAddr" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <div class="form-group form-check-inline">
+                                <label class="col-form-label">
+                                    <input asp-for="Gender" type="radio" value="M"
+                                           checked class="form-check-input" />
+                                    <span>Male</span>
+                                </label>
+                                <label class="col-form-label">
+                                    <input asp-for="Gender" type="radio" value="F"
+                                           class="form-check-input" />
+                                    <span>Female</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Vocation" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <select asp-for="Vocation"
+                                    asp-items="@ViewData["VocationList"]
+                                        as List<SelectListItem>"
+                                    class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="DOE" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <input asp-for="DOE" class="form-control" />
+                            <span asp-validation-for="DOE" class="text-danger" required></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Status" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-2 col-md-3">
+                            <select asp-for="Status"
+                                    asp-items="@ViewData["StatusList"]
+                                        as List<SelectListItem>"
+                                    class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group row btn-div">
+                            <div class="col-sm-5">
+                                <button class="form-btn reset-btn" type="reset" value="reset">Reset</button>
+                                <button type="submit" value="Register" class="form-btn">Submit</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <a asp-action="ViewAllPersonnelAndFlightAssigned" class="backbtn">Back to List</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Flight Scheduling";
+}
+
+<head>
+    <style>
+        .sqBtn {
+            background-color: #f0f0f0;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<div class="container-fluid">
+    <div class="row justify-content-center p-auto" style="margin: 100px 0px 100px 0px">
+
+        <div class="col-lg-3 col-md-4 my-4 text-center">
+            <a class="text-center btn sqBtn p-3" asp-controller="Staff" asp-action="CreateFlightRoute">
+                <!--Icon here-->
+                <img src="~/images/addFlightRoute.png" style="max-height: 180px;" />
+                <!--Text here-->
+                <h6 class="text-center mt-3">Create Flight Route</h6>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 my-4 text-center">
+            <a class="text-center btn sqBtn p-3" asp-controller="Staff" asp-action="ViewFlightRoutes">
+                <!--Icon here-->
+                <img src="~/images/FlightIcon.png" style="max-height: 180px;" />
+                <!--Text here-->
+                <h6 class="text-center mt-3">View Flight Routes</h6>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 my-4 text-center">
+            <a class="text-center btn sqBtn p-3" asp-controller="Staff" asp-action="ViewFlightSchedule">
+                <!--Icon here-->
+                <img src="~/images/calendar-512.png" style="max-height: 180px;" />
+                <!--Text here-->
+                <h6 class="text-center mt-3">View Flight Schedules</h6>
+            </a>
+        </div>
+    </div>
+</div>

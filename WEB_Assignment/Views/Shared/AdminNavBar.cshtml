@@ -1,0 +1,46 @@
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-action="Index"><img src="~/images/logo.png" class="img-responsive" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse d-sm-inline-flex">
+            <ul class="navbar-nav flex-grow-1 mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-action="Index">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Flight Scheduling
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-action="FlightSchedule">Flight Scheduling</a>
+                        <a class="dropdown-item" asp-action="CreateFlightRoute">Create Flight Route</a>
+                        <a class="dropdown-item" asp-action="ViewFlightRoutes">View Flight Routes</a>
+                        <a class="dropdown-item" asp-action="ViewFlightSchedule">View Flight Schedules</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Flight Personnel Assignment
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-action="CreateFlightPersonelRecord">Create Flight Personnel Record</a>
+                        <a class="dropdown-item" asp-action="ViewAllPersonnelAndFlightAssigned">View All Personnel And Flight Assigned</a>
+                        <a class="dropdown-item" asp-action="AssignPersonnelToflight">Assign Personnel To Flight</a>
+                        <a class="dropdown-item" asp-action="UpdateFlightPersonnelStatus">Update Flight Personnel Status</a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav flex-grow-1 ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="LogOut">Sign out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

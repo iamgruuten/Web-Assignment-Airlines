@@ -1,0 +1,68 @@
+﻿@model WEB_Assignment.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Customer";
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+
+<body>
+    <div class="col-sm-12 padding-rmv">
+        <img src="~/images/loginbg.jpeg" class="img-fluid w-100" />
+        <div class="container" id="mainContainer">
+
+            <div class="flex-container">
+                <h1 class="bottom-left">Login</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <hr />
+        <div class="container">
+            <form asp-action="Login" method="post">
+                <fieldset class="FormContent">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label asp-for="EmailAddress" class="font-weight-bold control-label"></label>
+                                    <input asp-for="EmailAddress" class="form-control" />
+                                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="form-group">
+                                    <label asp-for="Password" class="font-weight-bold control-label"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                    <span class="text-danger">@Html.ValidationMessage("CustomError")</span>
+                                </div>
+                                <br />
+                                <br />
+
+                                <div class="form-group">
+                                    <div class="col-sm-5">
+                                        <button type="submit" value="Login">LOGIN</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 mx-auto">
+                            <br />
+                            <br />
+                            <p class="font-weight-bold">New to Lion City Airlines? Sign up to get started!</p>
+                            <br />
+                            <div class="col-sm-6">
+                                <a class="btn btn-default" asp-action="Register">CREATE</a>
+                            </div>
+                            <br />
+                            <img src="~/images/loginpage.png" class="img-fluid login-attendant" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>

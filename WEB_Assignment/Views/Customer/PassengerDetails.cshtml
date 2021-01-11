@@ -1,0 +1,116 @@
+﻿@model WEB_Assignment.Models.PassengerViewModel
+
+@{
+    ViewData["Title"] = "PassengerDetails";
+    double totalCost = Convert.ToDouble(TempData["costType"]) * Convert.ToDouble(Context.Session.GetInt32("numberOfPassenger"));
+    TempData.Keep("departDate");
+    TempData.Keep("departureCity");
+    TempData.Keep("departTime");
+    TempData.Keep("arrivalDate");
+    TempData.Keep("arrivalCity");
+    TempData.Keep("arrivalTime");
+    TempData.Keep("costType");
+
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<div class="row" style="border-bottom: solid 1px black; background-color:#f6f9ff">
+    <div class="col-sm-4 vl">
+        <p class="col-lg-12 title-info mt-2">Departing</p>
+        <p class="col-lg-12 body-info">@TempData["departDate"]</p>
+        <p class="col-lg-12 body-info">@TempData["departureCity"] - @TempData["departTime"]</p>
+    </div>
+
+    <div class="col-sm-4 vl">
+        <p class="col-lg-12 title-info mt-2">Arrival</p>
+        <p class="col-lg-12 body-info">@TempData["arrivalDate"]</p>
+        <p class="col-lg-12 body-info">@TempData["arrivalCity"] - @TempData["arrivalTime"]</p>
+    </div>
+
+    <div class="col-sm-4">
+        <p class="col-lg-12 title-info mt-2">Total Fare</p>
+        <p class="col-lg-12 title-info">@Context.Session.GetInt32("numberOfPassenger") Passenger</p>
+        <div class="row padding-rmv">
+            <p class="col-lg-6 title-info">@Context.Session.GetString("SeatType") Class</p>
+            <p class="col-lg-6">SGD @TempData["costType"] / Pax</p>
+        </div>
+        <div class="row padding-rmv">
+            <p class="col-lg-6 title-info">Subtotal</p>
+            <p class="col-lg-6">SGD @totalCost.ToString("#.##")</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <br />
+    <br />
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-2 mb-3">
+                <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                    @for (int i = 1; i < Context.Session.GetInt32("numberOfPassenger") + 1; i++)
+                    {
+                        String active;
+                        active = (i == 1) ? "active" : "";
+                    <li class="nav-item">
+                        <a class="nav-link @active" id="home-tab" data-toggle="tab" href="#passenger@(i)" aria-selected="true">Passenger @i</a>
+                    </li>
+                    }
+                </ul>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-10">
+                <form asp-action="PassengerDetails" method="post">
+                    <div class="tab-content" id="myTabContent">
+
+                        @for (int i = 1; i < Context.Session.GetInt32("numberOfPassenger") + 1; i++)
+                        {
+                            String active;
+                            active = (i == 1) ? "active show" : "";
+
+                        <div class="tab-pane fade @active" id="passenger@(i)">
+                            <h3>Passenger Details </h3><span class="material-icons">airline_seat_recline_extra</span>
+                            <br />
+                            <br />
+
+                            <h4>Passenger @i</h4>
+                            <br />
+
+                            <div class="form-group">
+                                <label asp-for="passengerDetails[i-1].passengerName" class="control-label"></label>
+                                <input asp-for="passengerDetails[i-1].passengerName" class="form-control" />
+                                <span asp-validation-for="passengerDetails[i-1].passengerName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="passengerDetails[i-1].nationality" class="control-label"></label>
+                                <input asp-for="passengerDetails[i-1].nationality" class="form-control" />
+                                <span asp-validation-for="passengerDetails[i-1].nationality" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="passengerDetails[i-1].passportNumber" class="control-label"></label>
+                                <input asp-for="passengerDetails[i-1].passportNumber" class="form-control" />
+                                <span asp-validation-for="passengerDetails[i-1].passportNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="passengerDetails[i-1].remarks" class="control-label"></label>
+                                <input asp-for="passengerDetails[i-1].remarks" class="form-control" />
+                                <span asp-validation-for="passengerDetails[i-1].remarks" class="text-danger"></span>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    <button class="Submit">Review</button>
+                </form>
+            </div>
+
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
+        </div>
+    </div>
+</div>

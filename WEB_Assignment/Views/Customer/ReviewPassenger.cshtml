@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WEB_Assignment.Models.PassengerModel>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+@{
+    ViewData["Title"] = "PassengerDetails";
+    var costDetails = Model.First().flightDetailsViewModel;
+    double totalCost = double.Parse(costDetails.costSelected) * Model.Count();
+}
+
+<div class="row" style="border-bottom: solid 1px black; background-color:#f6f9ff">
+    <div class="col-sm-4 vl">
+        <p class="col-lg-12 title-info mt-2">Departing</p>
+        <p class="col-lg-12 body-info">@costDetails.departureDate</p>
+        <p class="col-lg-12 body-info">@costDetails.departureCity - @costDetails.departureTime</p>
+    </div>
+
+    <div class="col-sm-4 vl">
+        <p class="col-lg-12 title-info mt-2">Arrival</p>
+        <p class="col-lg-12 body-info">@costDetails.arrivalDate</p>
+        <p class="col-lg-12 body-info">@costDetails.arrivalCity - @costDetails.arrivalTime</p>
+    </div>
+
+    <div class="col-sm-4">
+        <p class="col-lg-12 title-info mt-2">Total Fare</p>
+        <p class="col-lg-12 title-info">@Context.Session.GetInt32("numberOfPassenger") Passenger</p>
+        <div class="row padding-rmv">
+            <p class="col-lg-6 title-info">@Context.Session.GetString("SeatType") Class</p>
+            <p class="col-lg-6">SGD @costDetails.costSelected / Pax</p>
+        </div>
+        <div class="row padding-rmv">
+            <p class="col-lg-6 title-info">Subtotal</p>
+            <p class="col-lg-6">SGD @totalCost.ToString("#.##")</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 mb-3">
+    <h2>Review Passengers</h2>
+    @{ int k = 1;}
+    <div class="container-fluid-2">
+        @foreach (var passenger in Model)
+        {
+        <div class="container mt-2" style="border:solid 1px black;background-color:#F0F8FF">
+            <div class="row mt-2 mb-2">
+                <h4 class="col-sm-6">Passenger @(k++)</h4>
+                <a class="col-sm-2" asp-action="PassengerDetails">Edit</a>
+            </div>
+            <div class="row">
+                <div class="form-group mb-1 col-sm-4">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.passengerName)</label>
+                    <p class="body-info">@passenger.passengerName</p>
+                </div>
+
+                <div class="form-group mb-1 col-sm-4">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.nationality)</label>
+                    <p class="body-info">@passenger.nationality</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group mb-1 col-sm-4">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.passportNumber)</label>
+                    <p class="body-info">@passenger.passportNumber</p>
+                </div>
+
+                <div class="form-group mb-3 col-sm-4">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.remarks)</label>
+                    <p class="body-info">@passenger.remarks</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="row">
+        <div class="mt-1 col-sm-2">
+            <a class="btn btn-default" asp-action="CompleteBooking">Confirm</a>
+        </div>
+        <div class="mt-1 ml-2 col-sm-2">
+            <a class="btn btn-default" asp-action="PassengerDetails">Back</a>
+        </div>
+    </div>
+</div>

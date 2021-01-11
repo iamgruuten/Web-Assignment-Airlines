@@ -1,0 +1,58 @@
+﻿@model WEB_Assignment.Models.FlightSchedule.UpdateScheduleStatusViewModel;
+
+@{
+    ViewData["Title"] = "Update Flight Schedule Status for Flight Schedule No. " + @Model.ScheduleID;
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 p-3 m-3" style="background-color: #f0f0f0; border-radius: 20px">
+
+            <h1 class="mt-3 mb-5 text-center">Update Flight Schedule No. @Model.ScheduleID</h1>
+
+            <form asp-action="UpdateFlightSchedule">
+                <fieldset class="FormContent">
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="ScheduleID"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="ScheduleID" class="form-control" readonly />
+                            <span asp-validation-for="ScheduleID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="RouteID"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="RouteID" class="form-control" readonly />
+                            <span asp-validation-for="RouteID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="Status"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <select asp-for="Status" asp-items="@ViewData["options"] as List<SelectListItem>"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <div class="col-md-8 text-right">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <a asp-action="ViewFlightSchedule" asp-route-routeId="@Model.RouteID">Back to List</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+﻿@model WEB_Assignment.Models.FlightSchedule.FlightSchedule
+
+@{
+    ViewData["Title"] = "Create Flight Schedule for Route No. " + ViewData["routeId"];
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 p-3 m-3" style="background-color: #f0f0f0; border-radius: 20px">
+            <h1 class="mt-3 mb-5 text-center">Create Flight Schedule for Route No. @ViewData["routeId"]</h1>
+
+            <form asp-action="CreateFlightSchedule">
+                <fieldset class="FormContent">
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="FlightNumber"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="FlightNumber" class="form-control" />
+                            <span asp-validation-for="FlightNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="AircraftID"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="AircraftID" class="form-control" />
+                            <span asp-validation-for="AircraftID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="RouteID"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="RouteID" class="form-control" readonly />
+                            <span asp-validation-for="RouteID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="DepartureDateTime"
+                                class="col-sm-3 col-form-label">
+                        </label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="DepartureDateTime" class="form-control" />
+                            <span asp-validation-for="DepartureDateTime" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="EconomyClassPrice"
+                                class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="EconomyClassPrice" class="form-control" />
+                            <span asp-validation-for="EconomyClassPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label asp-for="BusinessClassPrice"
+                                class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9 col-md-5">
+                            <input asp-for="BusinessClassPrice" class="form-control" />
+                            <span asp-validation-for="BusinessClassPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <div class="col-md-8 text-right">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <a asp-action="ViewFlightSchedule" asp-route-routeId="@ViewData["routeId"]">Back to List</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

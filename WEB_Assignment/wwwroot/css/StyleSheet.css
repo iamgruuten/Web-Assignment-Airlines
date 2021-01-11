@@ -1,0 +1,440 @@
+﻿.Bgimg {
+    border: none;
+    margin: unset;
+    background: url(../images/Homepage.png) no-repeat;
+    background-size: cover;
+    /*max-width: 100%;
+    max-height: 100%;
+    height: 840px;
+    width: 2000px;
+    min-height: 100%;
+    min-width: 100%;*/
+    width: 100%;
+    height: 44vw; /*524/1181*95vw, calculated based on image proportions*/
+}
+
+.body {
+    background-color: #f5f5f5;
+}
+
+.btn-div {
+    max-height: 100%;
+    max-width: 100%;
+    padding-top: 625px;
+    position: relative;
+    left: 285px;
+}
+
+.btn-homepage {
+    max-height: 100%;
+    display: inline-block;
+    max-width: 100%;
+    background-color: #00266B;
+    border: 1px solid #00266B;
+    width: 250px;
+    min-width: 170px;
+    height: 60px;
+    padding: 20px;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-indent: 0px;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    word-spacing: normal;
+    text-shadow: none;
+    color: white;
+}
+
+button, .btn {
+    background-color: #00266B;
+    border: 1px solid #00266B;
+    width: 100%;
+    height: 3.125rem;
+    float: right;
+    letter-spacing: 1.5px;
+    text-align: center;
+    align-items: flex-start;
+    text-indent: 0px;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    word-spacing: normal;
+    text-shadow: none;
+    color: white;
+}
+
+    button:hover {
+        background-color: #003494;
+        color: white;
+        border: 1px solid #003494;
+    }
+
+/* Bottom left text */
+h1.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    color: azure;
+}
+
+@supports(object-fit: cover) {
+    .container img {
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+#div1 {
+    width: 100%;
+    background-image: url("../images/div1.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 50vh;
+}
+
+.login-attendant {
+    height: unset !important;
+}
+
+#divImg {
+    display: block;
+    position: absolute;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 1;
+    left: 50%;
+    border-radius: 50%;
+}
+
+#nav-color {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#div2 {
+    width: 100%;
+    background-image: url("../images/div2.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 50vh;
+}
+
+.container-fluid-2 {
+    padding: 0;
+    width: 100%;
+    position: relative;
+    background-color: white;
+}
+
+.row {
+    margin-left: 0px;
+}
+
+.tab-content {
+    color: black;
+    background-color: #FFFFFF;
+    padding: 5px 15px;
+}
+
+.form-rounded {
+    border-radius: 2px;
+}
+
+/** float container */
+.float-container {
+    border: solid 1px #ccc;
+    box-sizing: border-box;
+    position: relative;
+    /** active label */
+}
+
+    .float-container input {
+        border: none;
+        font-size: 1em;
+        outline: 0;
+        padding: 16px 0 10px;
+        width: 100%;
+    }
+
+    .float-container label {
+        font-size: 1em;
+        position: absolute;
+        color: dimgrey;
+        transform-origin: top left;
+        transform: translate(0, 16px) scale(1);
+        transition: all 0.1s ease-in-out;
+    }
+
+    .float-container.active label {
+        transform: translate(0, 4px) scale(0.75);
+    }
+
+.input-group img {
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 1;
+    transform: translateY(80%);
+}
+
+.padding-rmv {
+    padding: 0;
+}
+
+.full-input {
+    display: inline-block;
+    border: solid 1px #ccc;
+    height: auto;
+    margin-bottom: 0px;
+}
+
+.float-date {
+    outline: none;
+    border: none;
+    display: block;
+    height: calc(1.5em + .75rem);
+    line-height: 1.2em;
+}
+
+.float-label {
+    display: block;
+    color: dimgrey;
+    font-size: 0.7em;
+    margin-bottom: 0px;
+}
+
+.padding-rmv span {
+    font-size: 0.750em;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1200px) {
+    .icon {
+        display: none;
+    }
+}
+
+.stop-time {
+    display: block;
+    font-weight: 600;
+}
+
+.station-stop {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1rem, 1fr));
+    position: relative;
+    align-self: start;
+    margin-top: 0;
+}
+
+    .station-stop:before {
+        content: '';
+        display: block;
+        width: 100%;
+        border-top: 1px solid #cacdd4;
+        position: absolute;
+        top: 15px;
+    }
+
+.station-stop-detail {
+    position: relative;
+    left: 0;
+    transform: none;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.ico-flight {
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    transform: rotate(90deg);
+    text-align: center;
+    vertical-align: middle;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0.2em;
+}
+
+.hour {
+    text-transform: uppercase;
+    display: block;
+    font-family: "sigvar", serif;
+    font-size: 1.6em;
+    color: #00266b;
+}
+
+.country-name {
+    display: block;
+    font-weight: 600;
+    font-size: 1em;
+    text-transform: uppercase;
+}
+
+.date {
+    color: #666;
+    font-size: 1em;
+}
+
+.airline-info {
+    position: relative;
+    width: 100%;
+    text-transform: uppercase;
+    display: block;
+    font-size: 0.8vw;
+    color: #00266b;
+}
+
+.head-title-box {
+    background-color: #176e54;
+    position: absolute;
+    display: block;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 40px;
+    z-index: 10;
+}
+
+.data-table thead tr th {
+    background-color: #f5f5f5;
+    padding: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 100;
+    text-align: center;
+}
+
+.head-title-box-vip {
+    background-color: #800080;
+    position: absolute;
+    display: block;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 40px;
+    z-index: 10;
+}
+
+.text-head {
+    padding: 0;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.view_flight_card {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(60,64,67, 0.3), 0 1px 3px 1px rgba(60,64,67, 0.15);
+    margin: 2px 2px 8px;
+    overflow: hidden;
+}
+
+.data-table tbody tr td {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.body-title-box {
+    background-color: white;
+    display: block;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-weight: bolder;
+    text-transform: uppercase;
+    line-height: 40px;
+    z-index: 0;
+}
+
+.col-info-select {
+    display: block;
+    position: relative;
+    width: 156px;
+    padding: 40px 0 0;
+    margin: 0 auto;
+    border-top: solid 1px transparent;
+    border-left: 1px solid #cacdd4;
+    background: none;
+    outline: none;
+}
+
+.nav-flight-selections {
+    border-bottom: 1px solid black;
+}
+
+    .nav-flight-selections li a {
+        padding-top: 13%;
+    }
+
+.badge {
+    border-radius: 21px;
+    color: #ffc107;
+}
+
+.vl {
+    border-right: 1px solid black;
+}
+
+.title-info {
+    font-weight: bolder;
+    font-family: 'Montserrat';
+}
+
+.body-info {
+    font-family: 'Montserrat';
+    font-size: 1.1em;
+}
+
+.container .container-fluid-2 .container .control-label {
+    font-weight: bolder;
+}
+
+.bookingStyle {
+    box-shadow: 3px 3px 3px 3px #888888;
+    border-top: 10px solid red;
+}
+
+.nav-link {
+    font-weight: bold;
+}
+
+    .nav-link:hover {
+        color: whitesmoke;
+        color: darkred;
+    }
+
+.printDetails > div {
+    display: inline-block;
+}
+
+.navbar ul li a {
+    color: #fff;
+}
+
+    .navbar ul li a:hover {
+        color: #000;
+    }
